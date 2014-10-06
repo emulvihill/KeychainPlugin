@@ -18,7 +18,7 @@
  */
 
 #import "CDVKeychain.h"
-#import "SFHFKeychainUtils.h"
+#import "UICKeyChainStore.h"
 
 @implementation CDVKeychain
 
@@ -37,14 +37,15 @@
     [self.commandDelegate runInBackground:^{
         NSArray* arguments = command.arguments;
         CDVPluginResult* pluginResult = nil;
-        
+
         if ([arguments count] >= 2)
         {
             NSString* key = [arguments objectAtIndex:0];
             NSString* serviceName = [arguments objectAtIndex:1];
             NSError* error = nil;
-            
-            NSString* value = [SFHFKeychainUtils getPasswordForUsername:key andServiceName:serviceName error:&error];
+
+            //NSString* value = [SFHFKeychainUtils getPasswordForUsername:key andServiceName:serviceName error:&error];
+            NSString* value = [UICKeyChainStore stringForKey:key service:serviceName];
             if (error == nil && value != nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:value];
             } else {
@@ -57,7 +58,7 @@
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                              messageAsString:@"incorrect number of arguments for getForkey"];
         }
-        
+
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
@@ -67,15 +68,16 @@
     [self.commandDelegate runInBackground:^{
         NSArray* arguments = command.arguments;
         CDVPluginResult* pluginResult = nil;
-        
+
         if ([arguments count] >= 3)
         {
             NSString* key = [arguments objectAtIndex:0];
             NSString* serviceName = [arguments objectAtIndex:1];
             NSString* value = [arguments objectAtIndex:2];
             NSError* error = nil;
-            
-            BOOL stored = [SFHFKeychainUtils storeUsername:key andPassword:value forServiceName:serviceName updateExisting:YES error:&error];
+
+            //BOOL stored = [SFHFKeychainUtils storeUsername:key andPassword:value forServiceName:serviceName updateExisting:YES error:&error];
+            BOOL stored = [UICKeyChainStore setString:value forKey:key service:serviceName];
             if (stored && error == nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             } else {
@@ -88,7 +90,7 @@
                                              messageAsString:@"incorrect number of arguments for setForKey"];
         }
 
-        
+
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
@@ -98,14 +100,15 @@
     [self.commandDelegate runInBackground:^{
         NSArray* arguments = command.arguments;
         CDVPluginResult* pluginResult = nil;
-        
+
         if ([arguments count] >= 2)
         {
             NSString* key = [arguments objectAtIndex:0];
             NSString* serviceName = [arguments objectAtIndex:1];
             NSError* error = nil;
-            
-            BOOL deleted = [SFHFKeychainUtils deleteItemForUsername:key andServiceName:serviceName error:&error];
+
+            //BOOL deleted = [SFHFKeychainUtils deleteItemForUsername:key andServiceName:serviceName error:&error];
+            BOOL deleted = [UICKeyChainStore removeItemForKey:value key:key service:serviceName];
             if (deleted && error == nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             } else {
@@ -117,11 +120,10 @@
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                              messageAsString:@"incorrect number of arguments for removeForKey"];
         }
-        
+
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
 
 
 @end
-
