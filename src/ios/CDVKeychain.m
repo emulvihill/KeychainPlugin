@@ -108,7 +108,7 @@
             NSError* error = nil;
 
             //BOOL deleted = [SFHFKeychainUtils deleteItemForUsername:key andServiceName:serviceName error:&error];
-            BOOL deleted = [UICKeyChainStore removeItemForKey:value key:key service:serviceName];
+            BOOL deleted = [UICKeyChainStore removeItemForKey:key service:serviceName];
             if (deleted && error == nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             } else {
