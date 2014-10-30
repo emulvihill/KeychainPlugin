@@ -1,5 +1,12 @@
 Keychain Plugin for Apache Cordova
 =====================================
+### Why this fork?
+
+Replaced SFHFKeychainUtils with UICKeyChainStore library.
+
+
+### Description
+
 created by Shazron Abdullah
 
 [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html) except for the SFHFKeychainUtils code that is under **src/ios/SFHFKeychainUtils**
