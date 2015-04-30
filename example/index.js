@@ -30,7 +30,7 @@ function onGet() {
             alert("GET FAIL - Key: " + key + " Error: " + error);
         };
 
-    kc.getForKey(win, fail, key, servicename);
+    kc.getForKey(win, fail, key, servicename, "EXAMPLEGROUP");
 }
 
 function onSet() {
@@ -47,7 +47,7 @@ function onSet() {
             alert("SET FAIL - Key: " + key + " Error: " + error);
         };
 
-    kc.setForKey(win, fail, key, servicename, value);
+    kc.setForKey(win, fail, key, servicename, "EXAMPLEGROUP", value);
 }
 
 function onRemove() {
@@ -63,5 +63,5 @@ function onRemove() {
             alert("REMOVE FAIL - Key: " + key + " Error: " + error);
         };
 
-    kc.removeForKey(win, fail, key, servicename);
+    kc.removeForKey(win, fail, key, servicename, "EXAMPLEGROUP");
 }

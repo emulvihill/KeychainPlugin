@@ -38,14 +38,15 @@
         NSArray* arguments = command.arguments;
         CDVPluginResult* pluginResult = nil;
 
-        if ([arguments count] >= 2)
+        if ([arguments count] >= 3)
         {
             NSString* key = [arguments objectAtIndex:0];
             NSString* serviceName = [arguments objectAtIndex:1];
+            NSString* accessGroup = [arguments objectAtIndex:2];
             NSError* error = nil;
 
             //NSString* value = [SFHFKeychainUtils getPasswordForUsername:key andServiceName:serviceName error:&error];
-            NSString* value = [UICKeyChainStore stringForKey:key service:serviceName];
+            NSString* value = [UICKeyChainStore stringForKey:key service:serviceName accessGroup:accessGroup];
             if (error == nil && value != nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:value];
             } else {
@@ -69,15 +70,16 @@
         NSArray* arguments = command.arguments;
         CDVPluginResult* pluginResult = nil;
 
-        if ([arguments count] >= 3)
+        if ([arguments count] >= 4)
         {
             NSString* key = [arguments objectAtIndex:0];
             NSString* serviceName = [arguments objectAtIndex:1];
-            NSString* value = [arguments objectAtIndex:2];
+            NSString* accessGroup = [arguments objectAtIndex:2];
+            NSString* value = [arguments objectAtIndex:3];
             NSError* error = nil;
 
             //BOOL stored = [SFHFKeychainUtils storeUsername:key andPassword:value forServiceName:serviceName updateExisting:YES error:&error];
-            BOOL stored = [UICKeyChainStore setString:value forKey:key service:serviceName];
+            BOOL stored = [UICKeyChainStore setString:value forKey:key service:serviceName accessGroup:accessGroup];
             if (stored && error == nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             } else {
@@ -101,14 +103,15 @@
         NSArray* arguments = command.arguments;
         CDVPluginResult* pluginResult = nil;
 
-        if ([arguments count] >= 2)
+        if ([arguments count] >= 3)
         {
             NSString* key = [arguments objectAtIndex:0];
             NSString* serviceName = [arguments objectAtIndex:1];
+            NSString* accessGroup = [arguments objectAtIndex:2];
             NSError* error = nil;
 
             //BOOL deleted = [SFHFKeychainUtils deleteItemForUsername:key andServiceName:serviceName error:&error];
-            BOOL deleted = [UICKeyChainStore removeItemForKey:key service:serviceName];
+            BOOL deleted = [UICKeyChainStore removeItemForKey:key service:serviceName accessGroup:accessGroup];
             if (deleted && error == nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             } else {
