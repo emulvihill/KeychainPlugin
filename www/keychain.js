@@ -27,17 +27,17 @@ var Keychain = function() {
 
 Keychain.prototype.getForKey = function(successCallback, failureCallback, key, servicename, accessgroup)
 {
-	exec(successCallback, failureCallback, this.serviceName, "getForKey", [key, servicename]);
-}
+	exec(successCallback, failureCallback, this.serviceName, "getForKey", [key, servicename, accessgroup]);
+};
 
 Keychain.prototype.setForKey = function(successCallback, failureCallback, key, servicename, accessgroup, value)
 {
 	exec(successCallback, failureCallback, this.serviceName, "setForKey", [key, servicename, accessgroup, value]);
-}
+};
 
 Keychain.prototype.removeForKey = function(successCallback, failureCallback, key, servicename, accessgroup)
 {
 	exec(successCallback, failureCallback, this.serviceName, "removeForKey", [key, servicename, accessgroup]);
-}
+};
 
 module.exports = Keychain;
