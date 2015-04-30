@@ -45,8 +45,8 @@
             NSString* accessGroup = [arguments objectAtIndex:2];
             NSError* error = nil;
 
-            //NSString* value = [SFHFKeychainUtils getPasswordForUsername:key andServiceName:serviceName error:&error];
-            NSString* value = [UICKeyChainStore stringForKey:key service:serviceName accessGroup:accessGroup];
+            //NSString* value = [UICKeyChainStore stringForKey:key service:serviceName accessGroup:accessGroup];
+            NSString* value = [keychainAccessor objectForKey:key withAccessGroup:accessGroup];
             if (error == nil && value != nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:value];
             } else {
@@ -78,8 +78,8 @@
             NSString* value = [arguments objectAtIndex:3];
             NSError* error = nil;
 
-            //BOOL stored = [SFHFKeychainUtils storeUsername:key andPassword:value forServiceName:serviceName updateExisting:YES error:&error];
-            BOOL stored = [UICKeyChainStore setString:value forKey:key service:serviceName accessGroup:accessGroup];
+            //BOOL stored = [UICKeyChainStore setString:value forKey:key service:serviceName accessGroup:accessGroup];
+            BOOL stored = [keychainAccessor insertOrUpdateObject:value forKey:key withAccessGroup:accessGroup];
             if (stored && error == nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             } else {
@@ -111,7 +111,7 @@
             NSError* error = nil;
 
             //BOOL deleted = [SFHFKeychainUtils deleteItemForUsername:key andServiceName:serviceName error:&error];
-            BOOL deleted = [UICKeyChainStore removeItemForKey:key service:serviceName accessGroup:accessGroup];
+            BOOL deleted = [keychainAccessor deleteObjectForKey:key withAccessGroup:accessGroup];
             if (deleted && error == nil) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             } else {

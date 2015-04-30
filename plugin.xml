@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="com.shazron.cordova.plugin.keychainutil"
+    id="com.emulvihill.cordova.plugin.keychainutil"
     version="2.0.0">
 
     <name>KeyChain Plugin for Cordova iOS</name>
@@ -28,10 +28,10 @@
         </config-file>
 
         <header-file src="src/ios/CDVKeychain.h" />
-        <header-file src="src/ios/UICKeyChainStore/UICKeyChainStore.h"/>
+        <header-file src="src/ios/stickSports/KeychainAccessor.h"/>
 
         <source-file src="src/ios/CDVKeychain.m"/>
-        <source-file src="src/ios/UICKeyChainStore/UICKeyChainStore.m" compiler-flags="-fobjc-arc" />
+        <source-file src="src/ios/stickSports/KeychainAccessor.m" compiler-flags="-fobjc-arc" />
 
         <framework src="Security.framework" />
 
