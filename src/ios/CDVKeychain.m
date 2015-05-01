@@ -18,10 +18,12 @@
  */
 
 #import "CDVKeychain.h"
-#import "UICKeyChainStore.h"
+#import "KeychainAccessor.h"
 
 @implementation CDVKeychain
 
+KeychainAccessor* keychainAccessor;
+    
 - (CDVPlugin*) initWithWebView:(UIWebView*)theWebView
 {
     self = (CDVKeychain*)[super initWithWebView:(UIWebView*)theWebView];
