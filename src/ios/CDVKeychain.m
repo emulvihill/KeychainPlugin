@@ -22,16 +22,6 @@
 
 @implementation CDVKeychain
 
-- (CDVPlugin*) initWithWebView:(UIWebView*)theWebView
-{
-    self = (CDVKeychain*)[super initWithWebView:(UIWebView*)theWebView];
-    if (self) {
-		// initialization here
-    }
-    return self;
-}
-
-
 - (void) getForKey:(CDVInvokedUrlCommand*)command
 {
     [self.commandDelegate runInBackground:^{
